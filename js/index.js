@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000/upsic'
+const baseUrl = 'http://localhost:3000'
 
 var app = new Vue ({
     el: '#app',
@@ -39,7 +39,7 @@ var app = new Vue ({
             }
 
             axios
-                .post(`${baseUrl}/register`, newUser)
+                .post(`${baseUrl}/upsic/register`, newUser)
                 .then(response => {
                     this.inputEmail = ''
                     this.inputPassword = ''
@@ -67,7 +67,7 @@ var app = new Vue ({
             }
 
             axios
-                .post(`${baseUrl}/login`, User)
+                .post(`${baseUrl}/upsic/login`, User)
                 .then(response => {
                     localStorage.setItem('token', response.data.access_token)
                     this.inputEmail = ''
