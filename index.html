@@ -22,7 +22,58 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand">UPSic</a>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_regis" @click="getRegisForm">Register</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_login" @click="getLoginForm">Login</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_logout" @click="toHome">Logout</button>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row" v-if="isLogin == false">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body" v-if="form_regis">
+                            <h5 class="card-title text-center">Register</h5>
+                            <form class="form-signin" @submit.prevent="toRegis">
+                                <div class="form-label-group">
+                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                                    <label for="inputEmail">Email address</label>
+                                </div>
+                
+                                <div class="form-label-group">
+                                    <input type="password" v-model="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+                                    <label for="inputPassword">Password</label>
+                                </div>
+
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+                            </form>
+                        </div>
+
+                        <div class="card-body" v-if="form_login">
+                            <h5 class="card-title text-center">Sign In</h5>
+                            <form class="form-signin" @submit.prevent="toLogin">
+                                <div class="form-label-group">
+                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                                    <label for="inputEmail">Email address</label>
+                                </div>
+                
+                                <div class="form-label-group">
+                                    <input type="password" v-model="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+                                    <label for="inputPassword">Password</label>
+                                </div>
+
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="./js/index.js"></script>
 </body>
