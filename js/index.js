@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:3000/upsic'
 
-var app = new Vue ({
+var app = new Vue({
     el: '#app',
     data: {
         listMusic: [],
@@ -13,10 +13,55 @@ var app = new Vue ({
         button_logout: false,
         submit_regis: true,
         submit_login: false,
-        isLogin: false
+        isLogin: false,
+        state: '',
+        currentMusic: '',
+        currentLyric: '',
+        song: {}
+    },
+    created() {
+        if (localStorage.getItem('token')) {
+            this.isLogin = true
+            this.button_login = false
+            this.button_logout = true
+            this.button_regis = false
+            this.getAllSong()
+        }
     },
     methods: {
-        getRegisForm: function() {
+        getAllSong() {
+            axios({
+                url: `http://localhost:3000/music`,
+                method: 'get',
+            })
+                .then(({ data }) => {
+                    this.listMusic = data
+                })
+                .catch(err => {
+                    console.error(err.response)
+                })
+        },
+        pushMusic(data) {
+            this.listMusic.unshift(data)
+            this.currentMusic = data
+            this.state = 'lyric'
+            this.getLyric()
+        },
+        getLyric() {
+            this.currentLyric = 'Lyric nanti masuk sini'
+            
+          },
+          displayLyric (song) {
+            this.currentLyric = ''
+            this.currentMusic = song
+      
+            setTimeout( () => {
+              this.getLyric()
+            }, 500)
+      
+            this.state = 'lyric'
+          },
+        getRegisForm: function () {
             this.form_login = false
             this.button_regis = false
             this.button_login = true
@@ -24,7 +69,7 @@ var app = new Vue ({
             this.inputEmail = ''
             this.inputPassword = ''
         },
-        getLoginForm: function() {
+        getLoginForm: function () {
             this.form_regis = false
             this.button_login = false
             this.button_regis = true
@@ -32,7 +77,7 @@ var app = new Vue ({
             this.inputEmail = ''
             this.inputPassword = ''
         },
-        toRegis: function() {
+        toRegis: function () {
             let newUser = {
                 email: this.inputEmail,
                 password: this.inputPassword
@@ -48,19 +93,19 @@ var app = new Vue ({
                         title: 'Data has been saved',
                         showConfirmButton: false,
                         timer: 1500
-                      })
+                    })
                 })
                 .catch(err => {
                     Swal.fire({
                         title: err.response.data.message,
                         animation: false,
                         customClass: {
-                          popup: 'animated tada'
+                            popup: 'animated tada'
                         }
-                      })
+                    })
                 })
         },
-        toLogin: function() {
+        toLogin: function () {
             let User = {
                 email: this.inputEmail,
                 password: this.inputPassword
@@ -81,12 +126,12 @@ var app = new Vue ({
                         title: err.response.data.message,
                         animation: false,
                         customClass: {
-                          popup: 'animated tada'
+                            popup: 'animated tada'
                         }
-                      })
+                    })
                 })
         },
-        toHome: function() {
+        toHome: function () {
             localStorage.clear()
             this.isLogin = false
             this.button_logout = false
