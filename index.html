@@ -8,19 +8,12 @@
     <title>Upsic</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- SweetAlert2 -->
@@ -31,20 +24,17 @@
 </head>
 
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand">UPSic</a>
-                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_regis"
-                    @click="getRegisForm">Register</button>
-                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_login"
-                    @click="getLoginForm">Login</button>
-                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_logout"
-                    @click="toHome">Logout</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_regis" @click="getRegisForm">Register</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_login" @click="getLoginForm">Login</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_logout" @click="toHome">Logout</button>
             </div>
             <div class="nav-item">
-                <button class="h5 btn btn-primary mt-2" v-if="isLogin == true"
-                    @click.prevent="state = 'uploadForm'">+Upload</button>
+                <button class="h5 btn btn-primary mt-2" v-if="isLogin == true" @click.prevent="state = 'uploadForm'">+Upload</button>
             </div>
         </nav>
 
@@ -56,19 +46,16 @@
                             <h5 class="card-title text-center">Register</h5>
                             <form class="form-signin" @submit.prevent="toRegis">
                                 <div class="form-label-group">
-                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control"
-                                        placeholder="Email address" required autofocus>
+                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                                     <label for="inputEmail">Email address</label>
                                 </div>
 
                                 <div class="form-label-group">
-                                    <input type="password" v-model="inputPassword" id="inputPassword"
-                                        class="form-control" placeholder="Password" required>
+                                    <input type="password" v-model="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
                                     <label for="inputPassword">Password</label>
                                 </div>
 
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                    type="submit">Register</button>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
                             </form>
                         </div>
 
@@ -76,14 +63,12 @@
                             <h5 class="card-title text-center">Sign In</h5>
                             <form class="form-signin" @submit.prevent="toLogin">
                                 <div class="form-label-group">
-                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control"
-                                        placeholder="Email address" required autofocus>
+                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                                     <label for="inputEmail">Email address</label>
                                 </div>
 
                                 <div class="form-label-group">
-                                    <input type="password" v-model="inputPassword" id="inputPassword"
-                                        class="form-control" placeholder="Password" required>
+                                    <input type="password" v-model="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
                                     <label for="inputPassword">Password</label>
                                 </div>
 
@@ -96,8 +81,7 @@
             </div>
             <div class="row" v-if="isLogin == true">
                 <!-- upload music form -->
-                <upload-form class="mt-2" @close-upload="state = ''" v-if="state == 'uploadForm'"
-                    @create-music="pushMusic"></upload-form>
+                <upload-form class="mt-2" @close-upload="state = ''" v-if="state == 'uploadForm'" @create-music="pushMusic"></upload-form>
 
                 <!-- song-list -->
                 <div class="col-8">
@@ -118,6 +102,15 @@
 
 
         </div>
+        <!-- <show-lyric>
+
+        </show-lyric> -->
+        <!-- <show-lyric v-bind:lyric="lyric"></show-lyric> -->
+
+        <!-- 
+        <div v-bind="lyric">
+            {{lyric}}
+        </div> -->
     </div>
 
 
@@ -127,6 +120,16 @@
     <script src="./js/components/songLyric.js"></script>
     <!-- instance vue -->
     <script src="./js/index.js"></script>
+    <!-- <script>
+        $(document).ready(function() {
+            let a = "<div id='rg_embed_link_1' class='rg_embed_link' data-song-id='1'>Read <a href='https://genius.com/Camron-killa-cam-lyrics'>“Killa Cam” by Cam'ron</a> on Genius</div>"
+            let b = "<script crossorigin src='//genius.com/songs/1/embed.js'>"
+            $('#lirics').append(a) $('#lirics').append(b)
+        })
+    </script> -->
+    <!-- <div id='rg_embed_link_3069235' class='rg_embed_link' data-song-id='3069235'>Read <a href='https://genius.com/Daboii-humble-lyrics'>“Humble” by DaBoii</a> on Genius</div>
+    <script crossorigin src='//genius.com/songs/3069235/embed.js'></script>
+    </script> -->
 </body>
 
 </html>
