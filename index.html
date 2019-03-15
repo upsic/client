@@ -30,9 +30,12 @@
                 <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_login" @click="getLoginForm">Login</button>
                 <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_logout" @click="toHome">Logout</button>
             </div>
+            <div class="nav-item">
+                <button class="h5 btn btn-primary mt-2" @click.prevent="state = 'uploadForm'">+Upload</button>
+              </div>
         </nav>
 
-        <div class="container">
+        <div class="container d-flex row">
             <div class="row" v-if="isLogin == false">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div class="card card-signin my-5">
@@ -72,9 +75,32 @@
                     </div>
                 </div>
             </div>
+            <!-- upload music form -->
+            <upload-form class="mt-2" @close-upload="state = ''" v-if="state == 'uploadForm'" @create-music="pushMusic"></upload-form>
+
+            <!-- song-list -->
+            <div class="col-8" >
+                <div class="row">
+                    <song-list @current-song="displayLyric " v-for="song in listMusic" :key="song._id" :song="song"></song-card>
+                </div>
+            </div>
+
+            <!-- song-lyric -->
+            <div class="col-3">
+                <div class="row">
+                    <song-lyric v-if="state == 'lyric'" :current-music="currentMusic" :current-lyric="currentLyric"></song-lyric>
+                </div>
+            </div>
+
         </div>
     </div>
 
+
+    <!-- component vue -->
+    <script src="./js/components/uploadForm.js"></script>
+    <script src="./js/components/songList.js"></script>
+    <script src="./js/components/songLyric.js"></script>
+    <!-- instance vue -->
     <script src="./js/index.js"></script>
 </body>
 </html>
