@@ -67,7 +67,7 @@ var app = new Vue({
             this.currentMusic = song
             console.log(song)
             setTimeout(() => {
-                this.searchSong('Cheap Thrills')
+                this.searchSong(song.title)
             }, 500)
 
             this.state = 'lyric'
