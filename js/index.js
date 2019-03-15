@@ -120,6 +120,7 @@ var app = new Vue({
                     this.button_regis = false
                     this.button_logout = true
                     this.isLogin = true
+                    this.getAllSong()
                 })
                 .catch(err => {
                     Swal.fire({

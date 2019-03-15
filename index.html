@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Upsic</title>
-    
+
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <!-- Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- SweetAlert2 -->
@@ -21,21 +29,26 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand">UPSic</a>
-                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_regis" @click="getRegisForm">Register</button>
-                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_login" @click="getLoginForm">Login</button>
-                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_logout" @click="toHome">Logout</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_regis"
+                    @click="getRegisForm">Register</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_login"
+                    @click="getLoginForm">Login</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" v-if="button_logout"
+                    @click="toHome">Logout</button>
             </div>
             <div class="nav-item">
-                <button class="h5 btn btn-primary mt-2" @click.prevent="state = 'uploadForm'">+Upload</button>
-              </div>
+                <button class="h5 btn btn-primary mt-2" v-if="isLogin == true"
+                    @click.prevent="state = 'uploadForm'">+Upload</button>
+            </div>
         </nav>
 
-        <div class="container d-flex row">
+        <div class="container">
             <div class="row" v-if="isLogin == false">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div class="card card-signin my-5">
@@ -43,16 +56,19 @@
                             <h5 class="card-title text-center">Register</h5>
                             <form class="form-signin" @submit.prevent="toRegis">
                                 <div class="form-label-group">
-                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control"
+                                        placeholder="Email address" required autofocus>
                                     <label for="inputEmail">Email address</label>
                                 </div>
-                
+
                                 <div class="form-label-group">
-                                    <input type="password" v-model="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+                                    <input type="password" v-model="inputPassword" id="inputPassword"
+                                        class="form-control" placeholder="Password" required>
                                     <label for="inputPassword">Password</label>
                                 </div>
 
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                    type="submit">Register</button>
                             </form>
                         </div>
 
@@ -60,37 +76,46 @@
                             <h5 class="card-title text-center">Sign In</h5>
                             <form class="form-signin" @submit.prevent="toLogin">
                                 <div class="form-label-group">
-                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                                    <input type="email" v-model="inputEmail" id="inputEmail" class="form-control"
+                                        placeholder="Email address" required autofocus>
                                     <label for="inputEmail">Email address</label>
                                 </div>
-                
+
                                 <div class="form-label-group">
-                                    <input type="password" v-model="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+                                    <input type="password" v-model="inputPassword" id="inputPassword"
+                                        class="form-control" placeholder="Password" required>
                                     <label for="inputPassword">Password</label>
                                 </div>
 
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign
+                                    in</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- upload music form -->
-            <upload-form class="mt-2" @close-upload="state = ''" v-if="state == 'uploadForm'" @create-music="pushMusic"></upload-form>
+            <div class="row" v-if="isLogin == true">
+                <!-- upload music form -->
+                <upload-form class="mt-2" @close-upload="state = ''" v-if="state == 'uploadForm'"
+                    @create-music="pushMusic"></upload-form>
 
-            <!-- song-list -->
-            <div class="col-8" >
-                <div class="row">
-                    <song-list @current-song="displayLyric " v-for="song in listMusic" :key="song._id" :song="song"></song-card>
+                <!-- song-list -->
+                <div class="col-8">
+                    <div class="row">
+                        <song-list @current-song="displayLyric " v-for="song in listMusic" :key="song._id" :song="song">
+                            </song-card>
+                    </div>
+                </div>
+
+                <!-- song-lyric -->
+                <div class="col-4 justify-content-center">
+                    <div class="row">
+                        <song-lyric v-if="state == 'lyric'" :current-music="currentMusic" :current-lyric="currentLyric">
+                        </song-lyric>
+                    </div>
                 </div>
             </div>
 
-            <!-- song-lyric -->
-            <div class="col-3">
-                <div class="row">
-                    <song-lyric v-if="state == 'lyric'" :current-music="currentMusic" :current-lyric="currentLyric"></song-lyric>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -103,4 +128,5 @@
     <!-- instance vue -->
     <script src="./js/index.js"></script>
 </body>
+
 </html>
