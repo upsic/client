@@ -11,7 +11,8 @@ Vue.component('song-list', {
             <h5 class="card-title text-center" style="color: black; cursor: pointer;" @click.prevent="detail(song)"> {{ song.title }} </h5>
             <img class="image card-img" :src="song.img_url" :alt="song.img_url">
             <!-- SHARE FACEBOOK -->
-            <button class="btn btn-secondary mt-2 float-right" style="background-color: #efefef; border-radius: 100%"><a :href="'https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=' + song.url + '&display=popup&ref=plugin&src=share_button'"><i class="fab fa-facebook-f"></i></a></button>
+            
+            <div class="fb-share-button" :data-href="song.url" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
         </div>
     </div>
     `

@@ -28,6 +28,7 @@ var app = new Vue({
             this.button_login = false
             this.button_logout = true
             this.button_regis = false
+            this.currentLyric = ''
             this.getAllSong()
         }
         let ckeditor = document.createElement('script');
@@ -37,9 +38,12 @@ var app = new Vue({
     methods: {
         getAllSong() {
             axios({
-                    url: `http://localhost:3000/music`,
-                    method: 'get',
-                })
+                url: `http://localhost:3000/music`,
+                method: 'get',
+                headers : {
+                    access_token : localStorage.getItem('token')
+                }
+            })
                 .then(({ data }) => {
                     this.listMusic = data
                 })
@@ -63,7 +67,7 @@ var app = new Vue({
             this.currentMusic = song
             console.log(song)
             setTimeout(() => {
-                this.searchSong('Cheap Thrills')
+                this.searchSong(song.title)
             }, 500)
 
             this.state = 'lyric'
