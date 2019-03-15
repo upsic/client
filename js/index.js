@@ -147,7 +147,9 @@ var app = new Vue({
             localStorage.clear()
             this.isLogin = false
             this.button_logout = false
-            this.button_regis = true
+            this.button_login = true
+            this.form_regis = true
+            this.form_login = false
         },
         searchSong: function(songName) {
             console.log(`songname`, songName)
