@@ -17,6 +17,7 @@ var app = new Vue({
         state: '',
         currentMusic: '',
         currentLyric: '',
+        currentImage: '',
         song: {},
         lyric: '',
         nyoba: ''
@@ -50,7 +51,8 @@ var app = new Vue({
             this.listMusic.unshift(data)
             this.currentMusic = data
             this.state = 'lyric'
-            this.getLyric()
+                // this.getLyric()
+            this.searchSong(data.title)
         },
         getLyric() {
             this.currentLyric = 'Lyric nanti masuk sini'
@@ -59,9 +61,9 @@ var app = new Vue({
         displayLyric(song) {
             this.currentLyric = ''
             this.currentMusic = song
-
+            console.log(song)
             setTimeout(() => {
-                this.getLyric()
+                this.searchSong('Cheap Thrills')
             }, 500)
 
             this.state = 'lyric'
@@ -144,6 +146,7 @@ var app = new Vue({
             this.button_regis = true
         },
         searchSong: function(songName) {
+            console.log(`songname`, songName)
             let temp = songName.toLowerCase()
             let song = {
                 q: songName.toLowerCase()
@@ -152,15 +155,17 @@ var app = new Vue({
             axios
                 .get(`${baseUrl}/search?q=${songName}`)
                 .then(response => {
-                    // console.log(response.data[0])
+                    // console.log(response.data)
                     let result = []
                     response.data.forEach(e => {
                         if (temp.toLowerCase() === e.result.title.toLowerCase()) {
+                            console.log('hhhhhhhh', e)
                             result.push(e)
                         }
                     });
                     // console.log(result)
                     this.getSong(result[0].result.id)
+                    this.currentImage = result[0].result.primary_artist.header_image_url
                 })
                 .catch(err => {
                     console.log(err)
@@ -172,7 +177,9 @@ var app = new Vue({
                 .get(`${baseUrl}/songs/${songId}`)
                 .then(response => {
                     console.log(response.data.embed_content)
+
                     let rawContent = response.data.embed_content
+                    this.currentLyric = rawContent
                     $('#lirics').append(rawContent)
                         // let rawHTML = response.data.embed_content.split(`</div>`)
                         // let realLyric = `${rawHTML[0]}</div>`
